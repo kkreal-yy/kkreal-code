@@ -1,0 +1,57 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: kkreal-code
+  
+  # 开发工具配置
+  devtools:
+    restart:
+      enabled: true
+  
+  # MySQL数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3307/kkreal?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+# 日志配置
+logging:
+  level:
+    # 根日志级别
+    root: INFO
+    # 业务日志级别
+    com.kkreal: INFO
+    # SQL日志级别
+    com.kkreal.mapper: DEBUG
+    com.baomidou.mybatisplus.core.executor: DEBUG
+    # 数据库连接日志
+    com.zaxxer.hikari: WARN
+  # 日志文件配置
+  file:
+    name: logs/kkreal-code.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId:-}] %logger{50} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId:-}] %logger{50} - %msg%n"
+
+# MyBatis-Plus配置
+mybatis-plus:
+  # Mapper XML文件位置
+  mapper-locations: classpath:mapper/*.xml
+  # 实体类别名包路径
+  type-aliases-package: com.kkreal.entity
+  # MyBatis配置
+  configuration:
+    # 下划线转驼峰
+    map-underscore-to-camel-case: true
+    # SQL日志输出
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # 全局配置
+  global-config:
+    db-config:
+      # 主键类型：自动增长
+      id-type: auto
+      # 表名前缀
+      table-prefix: 
