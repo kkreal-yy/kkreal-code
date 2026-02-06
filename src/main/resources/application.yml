@@ -36,6 +36,45 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId:-}] %logger{50} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId:-}] %logger{50} - %msg%n"
 
+# JWT配置
+jwt:
+  secret: kkreal-secret-key-change-in-production
+  expiration: 3600  # 1小时
+
+# SpringDoc OpenAPI 3.x + Swagger UI 5 配置
+springdoc:
+  swagger-ui:
+    path: /doc.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    show-extensions: true
+    deep-linking: true
+    doc-expansion: list
+    default-model-expand-level: 1
+    display-request-duration: true
+    try-it-out-enabled: true
+    # Enable syntax highlighting
+    syntax-highlight:
+      enabled: true
+    config-url: /v3/api-docs/swagger-config
+    validator-url: ""  # Disable validation by default
+  api-docs:
+    path: /v3/api-docs
+    groups:
+      enabled: true
+  cache:
+    disabled: false
+  # Enable swagger for dev only
+  show-actuator: true
+  # Group APIs
+  group-configs:
+    - group: 'public-apis'
+      paths-to-match: '/auth/**'
+      packages-to-scan: com.kkreal.auth.controller
+    - group: 'user-apis'
+      paths-to-match: '/api/users/**'
+      packages-to-scan: com.kkreal.controller
+
 # MyBatis-Plus配置
 mybatis-plus:
   # Mapper XML文件位置
